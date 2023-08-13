@@ -1,11 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState , useCallback } from 'react'
 import moment from 'moment'
 import { startFundRaising } from '../redux/interactions'
 import { useDispatch, useSelector } from 'react-redux'
 import { etherToWei } from '../helper/helper'
 import { toastSuccess,toastError } from '../helper/toastMessage'
+import { useIDKit } from "@worldcoin/idkit";
+import dynamic from "next/dynamic";
 
 const FundRiserForm = () => {
+
+  const IDKitWidget = dynamic(
+    () => import("@worldcoin/idkit").then((mod) => mod.IDKitWidget),
+    { ssr: false }
+  );
+
+  const { open, setOpen } = useIDKit();
+  const [isVerified, setIsVerified] = useState(false);
+
+  // Your existing handleProof function
+  const handleProof = useCallback((result) => {
+    // Assuming the verification is successful based on your logic
+    setIsVerified(true);
+
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(), 3000);
+    });
+  }, []);
+
+  useEffect(() => {
+    setOpen(false);
+  }, []);
    
     const crowdFundingContract = useSelector(state=>state.fundingReducer.contract)
     const account = useSelector(state=>state.web3Reducer.account)
@@ -157,12 +181,24 @@ const FundRiserForm = () => {
           />
         </div>
 
+        {isVerified ? (
         <button
           className="p-2 w-full bg-[#F56D91] text-white rounded-md hover:bg-[#d15677]"
           disabled={btnLoading}
         >
           {btnLoading ? "Loading..." : "Raise fund"}
         </button>
+      ) : (
+        <IDKitWidget
+          action="my_signal"
+          signal="my_signal"
+          handleVerify={handleProof}
+          onSuccess={() => console.log("Verification success")}
+          app_id="app_staging_add54a8fabc8467293ab274bfee34aa4"
+        >
+          {({ open }) => <button className="p-2 w-full bg-[#F56D91] text-white rounded-md hover:bg-[#d15677]" onClick={open}>Verify with World ID</button>}
+        </IDKitWidget>
+      )}
       </form>
     </>
   );
