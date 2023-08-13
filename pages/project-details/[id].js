@@ -23,6 +23,7 @@ const ProjectDetails = () => {
 
       const onSuccess = (data) =>{
         setContributors(data)
+        console.log("contributors",data)
       }
       const onError = (error) =>{
         console.log(error)

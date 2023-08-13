@@ -72,7 +72,7 @@ const Navbar = () => {
                 <div>
                   <button
                     type="button"
-                    className="bg-[#F7C984] flex text-sm rounded-md focus:outline-none focus:ring-0 focus:ring-offset-0 focus:ring-white"
+                    className="bg-[#912d83] flex text-sm rounded-md focus:outline-none focus:ring-0 focus:ring-offset-0 focus:ring-white"
                     id="user-menu-button"
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -83,43 +83,6 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* <!-- Mobile menu, show/hide based on menu state. --> */}
-        <div
-          className={`sm:hidden ${!openMenu ? "hidden" : ""}`}
-          id="mobile-menu"
-        >
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            <a
-              href="#"
-              className="bg-[#F7C984] text-greay block px-3 py-2 rounded-md text-base font-medium"
-              aria-current="page"
-            >
-              Dashboard
-            </a>
-
-            <a
-              href="#"
-              className="text-greay hover:bg-[#F7C984] hover:text-greay block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Team
-            </a>
-
-            <a
-              href="#"
-              className="text-greay hover:bg-[#F7C984] hover:text-greay block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Projects
-            </a>
-
-            <a
-              href="#"
-              className="text-greay hover:bg-[#F7C984] hover:text-greay block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Calendar
-            </a>
           </div>
         </div>
       </nav>

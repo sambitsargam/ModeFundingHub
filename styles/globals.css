@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body{
-    background: #F7F5F2;
+    background: #8db4da;
 }
 
 button:disabled{
@@ -36,7 +36,7 @@ button:disabled{
 }
   
 .progress{
-    @apply bg-[#F56D91] w-full text-xs font-medium text-white text-center p-0.5 leading-none rounded-l-full;
+    @apply bg-[#e94974] w-full text-xs font-medium text-white text-center p-0.5 leading-none rounded-l-full;
 }
 
 .date-picker input {
