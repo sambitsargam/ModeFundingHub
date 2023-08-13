@@ -9,6 +9,7 @@ import { Router } from 'next/router';
 import NProgress from 'nprogress'
 import "nprogress/nprogress.css";
 import { chainOrAccountChangedHandler } from '../helper/helper';
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
 
@@ -40,10 +41,13 @@ function MyApp({ Component, pageProps }) {
   
   return (
     <>
-      <ToastContainer/>
+      <Head>
+        <title>ModeFundingHub</title>
+      </Head>
+      <ToastContainer />
       <Component {...pageProps} />
     </>
-  )
+  );
 }
 
 export default wrapper.withRedux(MyApp)

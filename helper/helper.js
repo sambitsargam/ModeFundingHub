@@ -81,20 +81,63 @@ export const withdrawRequestDataFormatter = (data) =>{
 }
 
 export const connectWithWallet = async (onSuccess) => {
-  //connect web3 with http provider
+  // Connect web3 with http provider
   if (window.ethereum) {
-   window.ethereum.request({method:"eth_requestAccounts"})
-   .then(res=>{
-    onSuccess()
-   }).catch(error=>{
-     alert(error.message)
-   })
+    try {
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      const chainId = await window.ethereum.request({ method: "eth_chainId" });
+
+      if (chainId === "0x397") {
+        onSuccess();
+      } else {
+        try {
+          await ethereum.request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: "0x397" }],
+          });
+          alert("Chain switched successfully try to Connect again");
+        } catch (switchError) {
+          // This error code indicates that the chain has not been added to MetaMask.
+          if (switchError.code === 4902) {
+            try {
+              await ethereum.request({
+                method: "wallet_addEthereumChain",
+                params: [
+                  {
+                    chainId: "0x397",
+                    chainName: "Mode Testnet Chain", 
+                    rpcUrls: ["https://sepolia.mode.network"],
+                    nativeCurrency: {
+                      name: "Ethereum",
+                      symbol: "ETH",
+                      decimals: 18,
+                    },
+                  },
+                ],
+              });
+              alert("Chain added successfully try to Connect again");
+            } catch (addError) {
+              // Handle "add" error
+              console.error("Error adding custom chain:", addError);
+            }
+          } else {
+            // Handle other "switch" errors
+            console.error("Error switching chain:", switchError);
+          }
+        }
+    }
+    } catch (error) {
+      alert(error.message);
+    }
   } else {
     window.alert(
       "Non-Ethereum browser detected. You should consider trying MetaMask!"
     );
   }
 };
+
 
 export const chainOrAccountChangedHandler = () => {
   // reload the page to avoid any errors with chain or account change.

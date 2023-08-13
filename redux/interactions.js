@@ -1,7 +1,7 @@
 import Web3 from "web3";
 import * as actions from "./actions";
-import CrowdFunding from "../artifacts/contracts/ModeFundingHub.json";
-import Project from "../artifacts/contracts/crowdfund.json";
+import ModeFundingHub from "../artifacts/contracts/ModeFundingHub.sol/ModeFundingHub.json";
+import Project from "../artifacts/contracts/crowdfund.sol/Project.json";
 import { groupContributionByProject, groupContributors, projectDataFormatter, withdrawRequestDataFormatter} from "../helper/helper";
 
 const crowdFundingContractAddress = "0x95896950eC74266E785e623a1652a1221d84AD35";
@@ -28,7 +28,7 @@ export const loadAccount = async (web3, dispatch) => {
 
 //Connect with crowd funding contract
 export const loadCrowdFundingContract = async(web3,dispatch) =>{
-  const crowdFunding = new web3.eth.Contract(CrowdFunding.abi,crowdFundingContractAddress);
+  const crowdFunding = new web3.eth.Contract(ModeFundingHub.abi,crowdFundingContractAddress);
   dispatch(actions.crowdFundingContractLoaded(crowdFunding));
   return crowdFunding;
 }
