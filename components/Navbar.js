@@ -60,12 +60,20 @@ const Navbar = () => {
               </div>
             </div>
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <button
-                type="button"
-                className="p-1 w-40 truncate rounded-full text-greay hover:text-greay "
-              >
-                <span>{account}</span>
-              </button>
+              
+            <Link href="/my-account" passHref>
+            <span
+                      className={`${
+                        router.pathname === "/my-account"
+                          ? "bg-[#F7C984]"
+                          : ""
+                      } text-greay px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer hover:bg-[#F7C984] hover:text-greay`}
+                    >
+                      {account}
+                    </span>
+                  </Link>
+
+              
 
               {/* <!-- Profile  --> */}
               <div className="ml-3 relative">

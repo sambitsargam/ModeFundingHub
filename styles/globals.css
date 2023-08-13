@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body{
-    background: #8db4da;
+    background: #eeeec7;
 }
 
 button:disabled{

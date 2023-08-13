@@ -82,11 +82,11 @@ const ProjectDetails = () => {
           contributors?
             contributors.length > 0?
               contributors.map((data,i)=>(
-                  <div className='inner-card my-2 flex flex-row' key={i}>
+                  <div className='inner-card my-2 flex blue-700 flex-row' key={i}>
                     <div className='lg:w-1/5'>
-                      <div className='p-6 w-8 h-8 mx-auto my-auto rounded-md bg-slate-300 '></div>
+                      <div className='p-6 w-8 h-8 mx-auto my-auto rounded-md bg-blue-300 '></div>
                     </div>
-                    <div className='lg:w-4/5'>
+                    <div className='lg:w-4/5 '>
                         <p className='text-md font-bold text-gray-800 w-40 truncate '>{data.contributor}</p>
                         <p className='text-sm font-bold text-gray-500'>{data.amount} ETH</p>
                     </div>
