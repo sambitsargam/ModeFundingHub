@@ -4,10 +4,9 @@ import { startFundRaising } from '../redux/interactions'
 import { useDispatch, useSelector } from 'react-redux'
 import { etherToWei } from '../helper/helper'
 import { toastSuccess,toastError } from '../helper/toastMessage'
-import WorldcoinButton from "./WorldcoinButton";
 
 const FundRiserForm = () => {
-
+   
     const crowdFundingContract = useSelector(state=>state.fundingReducer.contract)
     const account = useSelector(state=>state.web3Reducer.account)
     const web3 = useSelector(state=>state.web3Reducer.connection)
@@ -20,6 +19,45 @@ const FundRiserForm = () => {
     const [minimumContributionAmount,setMinimumContributionAmount] = useState("")
     const [deadline,setDeadline] = useState("")
     const [btnLoading,setBtnLoading] = useState(false)
+  //  const onSuccess = (result) => {
+  //    // This is where you should perform frontend actions once a user has been verified, such as redirecting to a new page
+  //    window.alert(
+  //      "Successfully verified with World ID! Your nullifier hash is: " +
+  //        result.nullifier_hash
+  //    );
+  //  };
+
+  //  const handleProof = async (result) => {
+  //    console.log("Proof received from IDKit:\n", JSON.stringify(result)); // Log the proof from IDKit to the console for visibility
+  //    const reqBody = {
+  //      merkle_root: result.merkle_root,
+  //      nullifier_hash: result.nullifier_hash,
+  //      proof: result.proof,
+  //      credential_type: result.credential_type,
+  //      action: process.env.NEXT_PUBLIC_WLD_ACTION_NAME,
+  //      signal: "",
+  //    };
+  //    console.log(
+  //      "Sending proof to backend for verification:\n",
+  //      JSON.stringify(reqBody)
+  //    ); // Log the proof being sent to our backend for visibility
+  //    const res = await fetch("/api/verify", {
+  //      method: "POST",
+  //      headers: {
+  //        "Content-Type": "application/json",
+  //      },
+  //      body: JSON.stringify(reqBody),
+  //    });
+  //    const data = await res.json();
+  //    if (res.status === 200) {
+  //      console.log("Successful response from backend:\n", data); // Log the response from our backend for visibility
+  //    } else {
+  //      throw new Error(
+  //        `Error code ${res.status} (${data.code}): ${data.detail}` ??
+  //          "Unknown error."
+  //      ); // Throw an error if verification fails
+  //    }
+  //  };
 
 
     const riseFund = (e) =>{
@@ -126,26 +164,9 @@ const FundRiserForm = () => {
           {btnLoading ? "Loading..." : "Raise fund"}
         </button>
       </form>
-      <div className="w-6/12 bg-white py-5 flex rounded-[20px] items-center">
-        <div className="flex items-end flex-col px-5">
-          <h1 className="text-black text-right text-sm p-0 mb-3">
-            Prove your uniqueness and humaness. <br></br>
-            Verify your account using World ID
-          </h1>
-          {verified ? (
-            <button
-              disabled={true}
-              className="cursor-pointer border-none px-5 py-2 rounded-md w-fit mx-auto bg-black hover:opacity-90 hover:bg-black transition"
-            >
-              You are verified 🎉
-            </button>
-          ) : (
-            <WorldcoinButton signer={signer}></WorldcoinButton>
-          )}
-        </div>
-      </div>
     </>
   );
 }
+
 
 export default FundRiserForm
